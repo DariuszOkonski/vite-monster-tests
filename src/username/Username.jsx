@@ -5,15 +5,9 @@ const Username = () => {
 
   return (
     <React.Fragment>
-      <div data-testid='username'>{username}</div>
-      <button onClick={() => setUsername('bar')} data-testid='button'>
-        click
-      </button>
-      <input
-        type='text'
-        onChange={(e) => setUsername(e.target.value)}
-        data-testid='usernameInput'
-      />
+      <div>{username}</div>
+      <button onClick={() => setUsername('bar')}>click</button>
+      <input type='text' onChange={(e) => setUsername(e.target.value)} />
     </React.Fragment>
   );
 };

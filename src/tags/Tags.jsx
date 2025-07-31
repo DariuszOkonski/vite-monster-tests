@@ -13,9 +13,7 @@ const Tags = () => {
   return (
     <React.Fragment>
       {tags.map((tag) => (
-        <div key={tag.id} data-testid='tag'>
-          {tag.name}
-        </div>
+        <div key={tag.id}>{tag.name}</div>
       ))}
     </React.Fragment>
   );
