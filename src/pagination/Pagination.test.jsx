@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import Pagination from './Pagination';
 import { render, screen } from '@testing-library/react';
+import Pagination from './Pagination';
 import userEvent from '@testing-library/user-event';
 
 describe('Pagination', () => {
@@ -9,14 +9,14 @@ describe('Pagination', () => {
 
     const pageContainers = screen.getAllByTestId('page-container');
 
-    expect(pageContainers.length).toEqual(5);
     expect(pageContainers).toHaveLength(5);
-    expect(pageContainers[0]).toHaveTextContent('1');
+    expect(pageContainers[0]).toHaveTextContent(1);
   });
 
-  it('should emit clicked page', async () => {
+  it('should emit clicked', async () => {
     const user = userEvent.setup();
     const handleClick = vi.fn();
+
     render(
       <Pagination
         total={50}
@@ -30,9 +30,7 @@ describe('Pagination', () => {
 
     await user.click(pageContainers[0]);
 
-    expect(handleClick).toHaveBeenCalled();
     expect(handleClick).toHaveBeenCalledOnce();
-    expect(handleClick).toHaveBeenCalledTimes(1);
     expect(handleClick).toHaveBeenCalledWith(1);
   });
 });
