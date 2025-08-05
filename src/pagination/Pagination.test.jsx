@@ -2,6 +2,17 @@ import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Pagination from './Pagination';
 import userEvent from '@testing-library/user-event';
+import * as utils from '../utils';
+
+// this way we are mocking whole utils file
+// that means in Pagination.jsx we won't use range
+// but we will use mocked range
+// vi.mock is hoisted
+vi.mock('../utils', () => {
+  return {
+    range: () => [1, 2, 3, 4, 5],
+  };
+});
 
 describe('Pagination', () => {
   it('renders correct pagination', () => {
@@ -32,5 +43,12 @@ describe('Pagination', () => {
 
     expect(handleClick).toHaveBeenCalledOnce();
     expect(handleClick).toHaveBeenCalledWith(1);
+  });
+
+  it('spies on utils', () => {
+    vi.spyOn(utils, 'range');
+    render(<Pagination total={50} limit={10} currentPage={1} />);
+
+    expect(utils.range).toHaveBeenCalledWith(1, 6);
   });
 });
